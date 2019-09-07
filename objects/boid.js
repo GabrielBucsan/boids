@@ -131,7 +131,7 @@ class Boid{
         this.c.closePath();
 
         // this.c.beginPath();
-        // this.c.arc(0, 0, this.size / 4, 0, Math.PI * 2);
+        // this.c.arc(0, 0, this.size.x / 4, 0, Math.PI * 2);
         
         this.c.fillStyle = 'cyan';
         this.c.fill();

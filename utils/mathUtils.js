@@ -26,8 +26,16 @@ class MathUtils{
 
 class Vector{
     constructor(x, y){
-        this.x = x || 0;
-        this.y = y || 0;
+        if(x === undefined && y === undefined){
+            this.x = 0;
+            this.y = 0;
+        }else if(y === undefined){
+            this.x = x;
+            this.y = x;
+        }else{
+            this.x = x;
+            this.y = y;
+        }
     }
 
     add(vector){
@@ -74,5 +82,43 @@ class Vector{
 
     static subtract(vector1, vector2){
         return new Vector(vector1.x - vector2.x, vector1.y - vector2.y);
+    }
+}
+
+class Rectangle{
+    constructor(pos, size){
+        this.position = pos;
+        this.size = size;
+    }
+
+    containsPoint(point){
+        return (point.x >= this.position.x &&
+                point.y >= this.position.y &&
+                point.x <= this.position.x + this.size.x &&
+                point.y <= this.position.y + this.size.y)
+    }
+
+    intersects(form){
+        // it's a circle!
+        if(form.radius){
+            return (this.containsPoint(form.position) ||
+                    form.containsPoint(new Vector(this.position.x, this.position.y)) ||
+                    form.containsPoint(new Vector(this.position.x + this.size.x, this.position.y)) ||
+                    form.containsPoint(new Vector(this.position.x, this.position.y + this.size.y)) ||
+                    form.containsPoint(new Vector(this.position.x + this.size.x, this.position.y + this.size.y)));
+        }
+    }
+}
+
+class Circle{
+    constructor(pos, rad){
+        this.position = pos;
+        this.radius = rad;
+    }
+
+    containsPoint(point){
+        let x = point.x - this.position.x;
+        let y = point.y - this.position.y;
+        return ((x*x) + (y*y)) <= this.radius * this.radius;
     }
 }

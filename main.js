@@ -1,9 +1,9 @@
 $(document).ready(()=>{
 
-    const canvas = new Canvas(500, 500);
+    const canvas = new Canvas(400, 400);
     const c = canvas.context;
 
-    const numBoids = 150;
+    const numBoids = 200;
     const boids = [];
 
     for (let i = 0; i < numBoids; i++) {
@@ -22,9 +22,18 @@ $(document).ready(()=>{
         requestAnimationFrame(animate);
         canvas.update();
 
+        let quadTree = new QuadTree(new Rectangle(new Vector(), new Vector(canvas.size.x, canvas.size.y)), 4, c);
+
+        for (let i = 0; i < boids.length; i++) {
+            quadTree.insert(boids[i]);
+        }
+
+        // quadTree.render();
+
         for (let i = 0; i < boids.length; i++) {
             boids[i].draw();
-            boids[i].flockAcceleration(boids);
+            let nBoids = quadTree.query(new Circle(boids[i].position, boids[i].perceptionRadius));
+            boids[i].flockAcceleration(nBoids);
             boids[i].update();
         }
     })();
