@@ -22,18 +22,9 @@ $(document).ready(()=>{
         requestAnimationFrame(animate);
         canvas.update();
 
-        let quadTree = new QuadTree(new Rectangle(new Vector(), new Vector(canvas.size.x, canvas.size.y)), 4, c);
-
-        for (let i = 0; i < boids.length; i++) {
-            quadTree.insert(boids[i]);
-        }
-
-        // quadTree.render();
-
         for (let i = 0; i < boids.length; i++) {
             boids[i].draw();
-            let nBoids = quadTree.query(new Circle(boids[i].position, boids[i].perceptionRadius));
-            boids[i].flockAcceleration(nBoids);
+            boids[i].flockAcceleration(boids);
             boids[i].update();
         }
     })();
