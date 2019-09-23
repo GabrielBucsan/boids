@@ -1,9 +1,9 @@
 $(document).ready(()=>{
 
-    const canvas = new Canvas(400, 400);
+    const canvas = new Canvas(510, 510);
     const c = canvas.context;
 
-    const numBoids = 200;
+    const numBoids = 100;
     const boids = [];
 
     for (let i = 0; i < numBoids; i++) {

@@ -123,17 +123,17 @@ class Boid{
         this.c.translate(this.position.x, this.position.y);
         this.c.rotate(this.velocity.direction());
 
-        // this.c.beginPath();
-        // this.c.moveTo(0, 0);
-        // this.c.lineTo(-this.size.x, this.size.y / 2);
-        // this.c.lineTo(-0.75 * this.size.x, 0);
-        // this.c.lineTo(-this.size.x, -this.size.y / 2);
-        // this.c.closePath();
-
         this.c.beginPath();
-        this.c.arc(0, 0, this.size.x / 4, 0, Math.PI * 2);
+        this.c.moveTo(0, 0);
+        this.c.lineTo(-this.size.x, this.size.y / 2);
+        this.c.lineTo(-0.75 * this.size.x, 0);
+        this.c.lineTo(-this.size.x, -this.size.y / 2);
+        this.c.closePath();
+
+        // this.c.beginPath();
+        // this.c.arc(0, 0, this.size.x / 4, 0, Math.PI * 2);
         
-        this.c.fillStyle = 'cyan';
+        this.c.fillStyle = '#ffff00';
         this.c.fill();
 
         this.c.translate(-this.position.x, -this.position.y);
