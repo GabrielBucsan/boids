@@ -13,6 +13,25 @@
     <script src="objects/boid.js"></script>
 </head>
 <body>
-    <canvas></canvas>
+    <div class="row">
+        <canvas></canvas>
+        <div class="column width-300px padding-10px">
+            <span>Max velocity</span>
+            <form oninput="maxVelOut.value = maxVel.valueAsNumber" class='row'>
+                <input type="range" name="maxVel" id="maxVel" min="1" max="5" value="3" class='fill-width'>
+                <output name="maxVelOut" for="maxVel">3</output>
+            </form>
+            <span>Perception radius</span>
+            <form oninput="percRadiusOut.value = percRadius.valueAsNumber" class='row'>
+                <input type="range" name="percRadius" id="percRadius" min="10" max="100" value="40" class='fill-width'>
+                <output name="percRadiusOut" for="percRadius">40</output>
+            </form>
+            <span>Separation radius</span>
+            <form oninput="sepRadiusOut.value = sepRadius.valueAsNumber" class='row'>
+                <input type="range" name="sepRadius" id="sepRadius" min="5" max="50" value="10" class='fill-width'>
+                <output name="sepRadiusOut" for="sepRadius">10</output>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

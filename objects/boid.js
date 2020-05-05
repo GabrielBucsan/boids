@@ -2,15 +2,13 @@ class Boid{
     constructor({
         position: position,
         context: context,
-        sSize: sSize
+        sSize: sSize,
+        parameters: parameters
     }){
-        this.size = {
-            x: 7,
-            y: 4
-        };
-        this.maxVelocityMag = 3;
-        this.perceptionRadius = 40;
-        this.separationRadius = Math.random() * 10 + 10;
+        this.size = parameters.size
+        this.maxVelocityMag = parameters.maxVelocityMag;
+        this.perceptionRadius = parameters.perceptionRadius;
+        this.separationRadius = parameters.separationRadius;
 
         this.c = context;
         this.position = position;
