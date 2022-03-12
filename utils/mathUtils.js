@@ -73,7 +73,6 @@ class Rectangle{
     }
 
     intersects(form){
-        // it's a circle!
         if(form.radius){
             return (this.containsPoint(form.position) ||
                     form.containsPoint(new Vector(this.position.x, this.position.y)) ||

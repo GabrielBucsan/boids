@@ -1,13 +1,16 @@
 $(document).ready(()=>{
 
-    const canvas = new Canvas(1000, 600);
+    const canvasWidth = 1000;
+    const canvasHeight = 600;
+
+    const canvas = new Canvas(canvasWidth, canvasHeight);
     const c = canvas.context;
 
     const maxVelSlider = $('#maxVel');
     const percRadiusSlider = $('#percRadius');
     const sepRadiusSlider = $('#sepRadius');
 
-    const numBoids = 100;
+    const numBoids = canvasWidth * canvasHeight / 1000;
     const boids = [];
 
     const parameters = {
@@ -37,9 +40,18 @@ $(document).ready(()=>{
         requestAnimationFrame(animate);
         canvas.update();
 
+        let quadTree = new QuadTree(new Rectangle(new Vector(), new Vector(canvas.size.x, canvas.size.y)), 4, c);
+
+        for (let i = 0; i < boids.length; i++) {
+            quadTree.insert(boids[i]);
+        }
+
+        //quadTree.render();
+
         for (let i = 0; i < boids.length; i++) {
             boids[i].draw();
-            boids[i].flockAcceleration(boids);
+            let nBoids = quadTree.query(new Circle(boids[i].position, boids[i].perceptionRadius));
+            boids[i].flockAcceleration(nBoids);
             boids[i].update();
         }
     })();
