@@ -1,7 +1,7 @@
 $(document).ready(()=>{
 
-    const canvasWidth = 1000;
-    const canvasHeight = 600;
+    const canvasWidth = window.innerWidth - 350;
+    const canvasHeight = window.innerHeight;
 
     const canvas = new Canvas(canvasWidth, canvasHeight);
     const c = canvas.context;
@@ -9,6 +9,9 @@ $(document).ready(()=>{
     const maxVelSlider = $('#maxVel');
     const percRadiusSlider = $('#percRadius');
     const sepRadiusSlider = $('#sepRadius');
+    const showQuadTreeCheck = $('#quadTree')
+
+    let showQuadTree = false;
 
     const numBoids = canvasWidth * canvasHeight / 1000;
     const boids = [];
@@ -46,7 +49,9 @@ $(document).ready(()=>{
             quadTree.insert(boids[i]);
         }
 
-        //quadTree.render();
+        if (showQuadTree) {
+          quadTree.render();
+        }
 
         for (let i = 0; i < boids.length; i++) {
             boids[i].draw();
@@ -65,8 +70,12 @@ $(document).ready(()=>{
     $('#sepRadius').on('input', function () {
         updateParameters();
     });
+    $('#quadTree').on('input', function () {
+        updateParameters();
+    });
 
     function updateParameters(){
+      showQuadTree = showQuadTreeCheck[0].checked;
         for (let i = 0; i < boids.length; i++) {
             boids[i].maxVelocityMag = Number(maxVelSlider[0].value);
             boids[i].perceptionRadius = Number(percRadiusSlider[0].value);
